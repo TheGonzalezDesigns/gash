@@ -8,8 +8,4 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
-      - /tmp/.X11-unix:/tmp/.X11-unix  # Add this line
-    environment:  # Add this block
-      - DISPLAY=unix$DISPLAY
-      - XDG_RUNTIME_DIR=/tmp
     working_dir: /app
