@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  shag:
+  gash:
     container_name: gash
     build:
       context: .
