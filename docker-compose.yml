@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  shag:
+    container_name: gash
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    # Uncomment below if you eventually run a server and need to access it.
+    # ports:
+    #   - "8080:8080"
