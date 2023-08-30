@@ -20,12 +20,11 @@ impl Visualization {
 
     pub fn run(&mut self) {
         // Generate some rooms for demonstration
-        for _ in 0..10 {
-            self.rooms.push(Room::random_room());
-        }
+        let rooms_to_visualize: Vec<Room> = (0..10).map(|_| Room::random_room()).collect();
+        self.rooms.extend(rooms_to_visualize.iter().cloned());
 
         // Create and visualize the rooms
-        for room in &self.rooms {
+        for room in &rooms_to_visualize {
             self.visualize_room(room);
         }
 
@@ -50,7 +49,7 @@ impl Visualization {
             color: 0xFFFFFF,
             .. Default::default()
         };
-        let mut room_mesh = self.window.factory.mesh(geometry, material);
+        let room_mesh = self.window.factory.mesh(geometry, material);
         self.window.scene.add(&room_mesh);
 
         // Visualize the entry and exit doors on the room
@@ -71,7 +70,7 @@ impl Visualization {
             },
             .. Default::default()
         };
-        let mut door_mesh = self.window.factory.mesh(geometry, material);
+        let door_mesh = self.window.factory.mesh(geometry, material);
         self.window.scene.add(&door_mesh);
     }
 }
