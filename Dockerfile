@@ -1,7 +1,7 @@
 # Start with the official Rust image as a base
 FROM rust:latest
 
-# Install system dependencies for three-rs
+# Install system dependencies for three-rs and X11
 RUN apt-get update && \
     apt-get install -y \
     pkg-config \
@@ -17,7 +17,15 @@ RUN apt-get update && \
     libgl1-mesa-glx \
     libglu1-mesa-dev \
     freeglut3-dev \
-    mesa-common-dev && \
+    mesa-common-dev \
+    libx11-xcb1 \
+    libxcb1 \
+    libxkbcommon-x11-0 \
+    libxkbcommon0 \
+    libdbus-1-3 \
+    libwayland-client0 \
+    libwayland-cursor0 \
+    libwayland-egl1 && \
     rm -rf /var/lib/apt/lists/*
 
 # Set a working directory
