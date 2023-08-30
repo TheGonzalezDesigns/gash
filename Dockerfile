@@ -31,5 +31,12 @@ RUN apt-get update && \
 # Set a working directory
 WORKDIR /app
 
+RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+WORKDIR /app/wasm
+
+RUN rustup target add wasm32-unknown-unknown && \
+    cargo install --force wasm-pack
+
 # Command to run on container start (for now, it just keeps the container running)
 CMD ["tail", "-f", "/dev/null"]
