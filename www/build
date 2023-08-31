@@ -1,4 +1,10 @@
 #!/bin/bash
 
+# Install bun
 curl -fsSL https://bun.sh/install | bash
 
+# Bundle TypeScript code
+#bun build
+
+# If you want to serve the files during development
+# bun x serve .
