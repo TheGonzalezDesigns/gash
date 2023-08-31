@@ -33,11 +33,14 @@ RUN apt-get update && \
 # Set a working directory
 WORKDIR $RD
 
+COPY ./ .
+
 WORKDIR $RD/wasm
 
-COPY wasm/ .
+# Execute the build script
+RUN ./build
 
-RUN chown -R root:root .
+WORKDIR $RD/www
 
 # Execute the build script
 RUN ./build
