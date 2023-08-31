@@ -3,8 +3,13 @@
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 
+# Update PATH to include bun's installation directory
+export PATH="$HOME/.bun/bin:$PATH"
+
 # Bundle TypeScript code
 bun build --minify --outdir=production ./index.ts
 
+cp ./index.html ./production
+
 # If you want to serve the files during development
-# bun x serve .
+bunx serve --port 8080 ./production
