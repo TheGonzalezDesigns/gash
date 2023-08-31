@@ -4,7 +4,7 @@
 curl -fsSL https://bun.sh/install | bash
 
 # Bundle TypeScript code
-#bun build
+bun build --minify --outdir=production ./index.ts
 
 # If you want to serve the files during development
 # bun x serve .
