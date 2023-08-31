@@ -12,4 +12,4 @@ bun build --minify --outdir=production ./index.ts
 cp ./index.html ./production
 
 # If you want to serve the files during development
-bunx serve --port 8080 ./production
+bun x serve ./server.js
