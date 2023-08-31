@@ -33,16 +33,14 @@ RUN apt-get update && \
 # Set a working directory
 WORKDIR $RD
 
-RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-
 WORKDIR $RD/wasm
 
-RUN rustup target add wasm32-unknown-unknown && \
-    cargo install --force wasm-pack
+COPY wasm/ .
 
-CMD ["wasm-pack", "build", "--target", "web"]
+RUN chown -R root:root .
 
-WORKDIR $RD
+# Execute the build script
+RUN ./build
 
 # Command to run on container start (for now, it just keeps the container running)
 CMD ["tail", "-f", "/dev/null"]
