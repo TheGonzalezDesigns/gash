@@ -1,6 +1,9 @@
-use wasm_bindgen::prelude::*;
+mod doors;
 mod rooms;
+
 pub use rooms::Room;
+
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn greet() {
