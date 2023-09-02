@@ -1,7 +1,7 @@
 use std::collections::HashSet;
+use crate::rooms::Room;
 
-// Assuming Room has a unique identifier (like a usize or u32)
-#[derive(Hash, PartialEq, Eq, Clone)]
+#[derive(Hash, PartialEq, Eq, Clone, Debug)]
 pub struct RoomId(usize);
 
 pub struct PathFinder {
@@ -17,9 +17,13 @@ impl PathFinder {
         }
     }
 
-    pub fn find_path(&mut self, start_room: RoomId, grid: &RoomGrid) -> &Vec<RoomId> {
+    pub fn find_path(&mut self, start_room: RoomId, grid: &RoomGrid) -> Option<Vec<RoomId>> {
         self.dfs(start_room, grid);
-        &self.path
+        if !self.path.is_empty() {
+            Some(self.path.clone())
+        } else {
+            None
+        }
     }
 
     fn dfs(&mut self, current: RoomId, grid: &RoomGrid) {
@@ -30,16 +34,27 @@ impl PathFinder {
         self.visited.insert(current.clone());
         self.path.push(current.clone());
 
-        // Assuming RoomGrid provides a method `neighbors` that gives the neighbors of a room
         for neighbor in grid.neighbors(&current) {
             if !self.visited.contains(&neighbor) {
-                // Check if the door between current and neighbor is not locked
-                // This assumes some functionality in Room or Door to check if a room is accessible from another
                 if grid.is_accessible(&current, &neighbor) {
                     self.dfs(neighbor, grid);
                 }
             }
         }
+    }
+}
+
+pub struct RoomGrid {
+    rooms: Vec<Room>,
+}
+
+impl RoomGrid {
+    pub fn neighbors(&self, room_id: &RoomId) -> Vec<RoomId> {
+        vec![RoomId(room_id.0 + 1)]
+    }
+
+    pub fn is_accessible(&self, current: &RoomId, neighbor: &RoomId) -> bool {
+        true
     }
 }
 
@@ -51,34 +66,18 @@ mod tests {
 
     #[test]
     fn test_basic_pathfinding() {
-        // Simple scenario: 3 rooms in a row, all doors unlocked
         let rooms = vec![
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        struct MockRoomGrid {
-            rooms: Vec<Room>,
-        }
-
-        impl MockRoomGrid {
-            pub fn neighbors(&self, room: &RoomId) -> Vec<RoomId> {
-                vec![RoomId(room.0 + 1)]
-            }
-
-            pub fn is_accessible(&self, current: &RoomId, neighbor: &RoomId) -> bool {
-                true
-            }
-        }
-
-        let room_grid = MockRoomGrid { rooms };
-
+        let room_grid = RoomGrid { rooms };
         let mut pathfinder = PathFinder::new();
         let path = pathfinder.find_path(RoomId(0), &room_grid);
 
         assert!(path.is_some());
-        assert_eq!(path.unwrap(), vec![0, 1, 2]);
+        assert_eq!(path.unwrap(), vec![RoomId(0), RoomId(1), RoomId(2)]);
     }
 
     #[test]
@@ -90,7 +89,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 2);
+        let path = PathFinder::find_path(&rooms, 0, 2);
         assert!(path.is_none());
     }
 
@@ -100,7 +99,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 0);
+        let path = PathFinder::find_path(&rooms, 0, 0);
         assert_eq!(path, Some(vec![0])); // Only the start room
     }
 
@@ -111,7 +110,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 1);
+        let path = PathFinder::find_path(&rooms, 0, 1);
         assert_eq!(path, Some(vec![0, 1]));
     }
 
@@ -122,7 +121,7 @@ mod tests {
             Room::new(Door::new(DoorLock::LockedFromInside), Door::new(DoorLock::LockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 1);
+        let path = PathFinder::find_path(&rooms, 0, 1);
         assert!(path.is_none());
     }
 
@@ -134,7 +133,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 2);
+        let path = PathFinder::find_path(&rooms, 0, 2);
         assert!(path.is_some());
         assert_ne!(path, vec![0, 1, 2]); // The middle room should be skipped
     }
@@ -148,7 +147,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 3);
+        let path = PathFinder::find_path(&rooms, 0, 3);
         assert!(path.is_none()); // No path since the middle rooms block the way
     }
 
@@ -161,7 +160,7 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = find_path(&rooms, 0, 3);
+        let path = PathFinder::find_path(&rooms, 0, 3);
         assert_eq!(path, Some(vec![0, 1, 3])); // The third room is skipped
     }
 }
