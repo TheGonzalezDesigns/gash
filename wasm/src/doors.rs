@@ -1,5 +1,7 @@
 use rand::Rng;
+use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DoorLock {
     LockedFromInside,
@@ -19,7 +21,8 @@ impl DoorLock {
     }
 }
 
-#[derive(Debug, Clone)]
+#[wasm_bindgen]
+#[derive(Debug, Clone, Copy)]
 pub struct Door {
     pub lock: DoorLock,
 }
