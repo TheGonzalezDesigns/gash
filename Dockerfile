@@ -29,5 +29,7 @@ WORKDIR $RD/www
 # Execute the build script
 RUN ./build
 
+RUN ./test
+
 # Start the server
 CMD ["/root/.bun/bin/bun", "x", "serve", "-n", "-p", "9876", "./production/"]
