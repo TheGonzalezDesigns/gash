@@ -4,6 +4,9 @@ iterations=10
 
 for ((i=1; i<=iterations; i++))
 do
+    test="Test $i:\n"
+    title="\n=============================================$test---------------------------------------------\n"
+    echo -e $title >> test.log
     cargo test >> test.log 2>&1 &
 done
 
