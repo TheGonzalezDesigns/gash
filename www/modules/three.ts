@@ -43,11 +43,13 @@ for (let i = 0; i < 10; i++) {
 // This function takes an array of room indices and highlights them
 export function highlightRooms(path: number[]) {
   for (const index of path) {
-    rooms[index].material.color.set(0xff0000); // Highlight with red color
+    if (rooms[index]) {
+      rooms[index].material.color.set(0xff0000); // Highlight with red color
+    }
   }
 }
 
-// Render the scene
+// Render the scene continuously
 export function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
