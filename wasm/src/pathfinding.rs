@@ -1,8 +1,5 @@
 use std::collections::HashSet;
-use crate::rooms::RoomGrid;
-
-#[derive(Hash, PartialEq, Eq, Clone, Debug)]
-pub struct RoomId(usize);
+use crate::rooms::{RoomGrid, RoomId};
 
 pub struct PathFinder {
     visited: HashSet<RoomId>,
