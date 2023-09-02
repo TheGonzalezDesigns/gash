@@ -1,5 +1,4 @@
 use crate::doors::{Door, DoorLock};
-use rand::prelude::*;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -15,11 +14,14 @@ impl Room {
 }
 
 #[wasm_bindgen]
+#[derive(Hash, PartialEq, Eq, Clone, Debug)]
+pub struct RoomId(usize);
+
+#[wasm_bindgen]
 pub struct RoomGrid {
     rooms: Vec<Room>,
 }
 
-#[wasm_bindgen]
 impl RoomGrid {
     pub fn new(num_rooms: usize) -> Self {
         let mut rng = rand::thread_rng();
@@ -32,6 +34,23 @@ impl RoomGrid {
         }
 
         RoomGrid { rooms }
+    }
+
+    pub fn neighbors(&self, room_id: &RoomId) -> Vec<RoomId> {
+        if room_id.0 + 1 < self.rooms.len() {
+            vec![RoomId(room_id.0 + 1)]
+        } else {
+            Vec::new()
+        }
+    }
+
+    pub fn is_accessible(&self, current: &RoomId, neighbor: &RoomId) -> bool {
+        if let Some(current_room) = self.rooms.get(current.0) {
+            if let Some(neighbor_room) = self.rooms.get(neighbor.0) {
+                return current_room.exit.is_unlocked() && neighbor_room.entry.is_unlocked();
+            }
+        }
+        false
     }
 }
 
