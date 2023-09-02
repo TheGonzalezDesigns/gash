@@ -42,11 +42,15 @@ for (let i = 0; i < 10; i++) {
 
 // This function takes an array of room indices and highlights them
 export function highlightRooms(path: number[]) {
-  for (const index of path) {
-    if (rooms[index]) {
-      rooms[index].material.color.set(0xff0000); // Highlight with red color
+  let index = 0;
+  const highlightInterval = setInterval(() => {
+    if (index < path.length) {
+      rooms[path[index]].material.color.set(0xff0000); // Highlight with red color
+      index++;
+    } else {
+      clearInterval(highlightInterval);
     }
-  }
+  }, 200); // 200ms delay for example
 }
 
 // Render the scene continuously
