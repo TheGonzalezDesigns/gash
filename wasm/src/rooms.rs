@@ -34,3 +34,29 @@ impl RoomGrid {
         RoomGrid { rooms }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn door_lock_randomization() {
+        let mut rng = rand::thread_rng();
+        for _ in 0..100 {
+            let state = DoorLock::random(&mut rng);
+            assert!(matches!(state,
+                DoorLock::LockedFromInside |
+                DoorLock::LockedFromOutside |
+                DoorLock::UnlockedFromInside |
+                DoorLock::UnlockedFromOutside
+            ));
+        }
+    }
+
+    #[test]
+    fn room_grid_generation() {
+        let num_rooms = 10;
+        let grid = RoomGrid::new(num_rooms);
+        assert_eq!(grid.rooms.len(), num_rooms);
+    }
+}
