@@ -25,5 +25,7 @@ WORKDIR $RD/www
 # Execute the build script
 RUN ./build
 
-# Command to run on container start (for now, it just keeps the container running)
-CMD ["tail", "-f", "/dev/null"]
+# Start the server
+CMD ["/root/.bun/bin/bun", "x", "serve", "-n", "-p", "9876", "./production/"]
+
+#CMD ["tail", "-f", "/dev/null"]
