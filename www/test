@@ -7,7 +7,7 @@ mkdir tests
 
 wait
 
-bun test ./test.ts > ./tests/runtime.log 2>&1 &
+/root/.bun/bin/un test ./test.ts > ./tests/runtime.log 2>&1 &
 
 wait
 
