@@ -8,7 +8,8 @@ RUN apt-get update && \
     apt-get install -y \
     pkg-config \
     libudev-dev \
-    rsync && \
+    rsync \
+    vim && \
     rm -rf /var/lib/apt/lists/*
 
 # Set a working directory
@@ -30,5 +31,3 @@ RUN ./build
 
 # Start the server
 CMD ["/root/.bun/bin/bun", "x", "serve", "-n", "-p", "9876", "./production/"]
-
-#CMD ["tail", "-f", "/dev/null"]
