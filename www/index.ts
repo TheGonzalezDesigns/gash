@@ -1,12 +1,45 @@
-import init, { greet, find_path } from "./production/wasm.js";
+import init, { greet, wasm_find_path } from "./production/wasm.js";
 import { animate, highlightRooms } from "./modules/three";
+
+type DoorLock =
+  | "LockedFromInside"
+  | "LockedFromOutside"
+  | "UnlockedFromInside"
+  | "UnlockedFromOutside";
+
+interface Door {
+  lock: DoorLock;
+}
+
+interface Room {
+  entry: Door;
+  exit: Door;
+}
+
+interface RoomGrid {
+  rooms: Room[];
+}
+
+const sampleRoomGrid: RoomGrid = {
+  rooms: [
+    {
+      entry: { lock: "UnlockedFromInside" },
+      exit: { lock: "UnlockedFromOutside" },
+    },
+    {
+      entry: { lock: "LockedFromInside" },
+      exit: { lock: "LockedFromOutside" },
+    },
+    // ... more rooms as needed
+  ],
+};
 
 async function runWasm() {
   await init();
   greet();
 
-  // Assuming the Rust function's name is 'find_path' and it returns an array of room indices
-  const path = find_path();
+  const startRoomIndex = 0;
+  const path = wasm_find_path(startRoomIndex, sampleRoomGrid);
 
   if (path) {
     highlightRooms(path);
@@ -15,5 +48,4 @@ async function runWasm() {
 
 runWasm();
 animate();
-
 console.log("Hello via Bun!");
