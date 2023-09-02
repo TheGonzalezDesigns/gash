@@ -3,8 +3,8 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub struct Room {
-    entry: Door,
-    exit: Door,
+    pub entry: Door,
+    pub exit: Door,
 }
 
 impl Room {
@@ -15,11 +15,10 @@ impl Room {
 
 #[wasm_bindgen]
 #[derive(Hash, PartialEq, Eq, Clone, Debug)]
-pub struct RoomId(usize);
+pub struct RoomId(pub usize);
 
-#[wasm_bindgen]
 pub struct RoomGrid {
-    rooms: Vec<Room>,
+    pub rooms: Vec<Room>,
 }
 
 impl RoomGrid {
