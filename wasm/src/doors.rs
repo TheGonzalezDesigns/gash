@@ -42,6 +42,10 @@ impl Door {
             DoorLock::UnlockedFromInside | DoorLock::UnlockedFromOutside => true,
         }
     }
+
+    pub fn is_unlocked(&self) -> bool {
+        matches!(self.lock, DoorLock::UnlockedFromInside | DoorLock::UnlockedFromOutside)
+    }
 }
 
 #[cfg(test)]
