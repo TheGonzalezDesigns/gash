@@ -7,7 +7,8 @@ ENV RD=/app
 RUN apt-get update && \
     apt-get install -y \
     pkg-config \
-    libudev-dev && \
+    libudev-dev \
+    rsync && \
     rm -rf /var/lib/apt/lists/*
 
 # Set a working directory
