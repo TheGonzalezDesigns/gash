@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-use crate::rooms::Room;
+use crate::rooms::RoomGrid;
 
 #[derive(Hash, PartialEq, Eq, Clone, Debug)]
 pub struct RoomId(usize);
@@ -41,20 +41,6 @@ impl PathFinder {
                 }
             }
         }
-    }
-}
-
-pub struct RoomGrid {
-    rooms: Vec<Room>,
-}
-
-impl RoomGrid {
-    pub fn neighbors(&self, room_id: &RoomId) -> Vec<RoomId> {
-        vec![RoomId(room_id.0 + 1)]
-    }
-
-    pub fn is_accessible(&self, current: &RoomId, neighbor: &RoomId) -> bool {
-        true
     }
 }
 
