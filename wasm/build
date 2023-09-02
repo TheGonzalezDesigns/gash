@@ -6,4 +6,4 @@ rustup target add wasm32-unknown-unknown && \
 cargo install --force wasm-pack && \
 wasm-pack build --target web
 
-mv ./pkg/wasm_bg.wasm ..
+rsync -av ./pkg/ ../WASM_Assets
