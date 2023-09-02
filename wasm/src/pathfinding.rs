@@ -82,14 +82,16 @@ mod tests {
 
     #[test]
     fn test_no_path() {
-        // Scenario: 3 rooms in a row, middle room has locked doors
         let rooms = vec![
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
             Room::new(Door::new(DoorLock::LockedFromInside), Door::new(DoorLock::LockedFromOutside)),
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 2);
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
         assert!(path.is_none());
     }
 
@@ -99,8 +101,11 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 0);
-        assert_eq!(path, Some(vec![0])); // Only the start room
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
+        assert_eq!(path, Some(vec![RoomId(0)])); // Only the start room
     }
 
     #[test]
@@ -110,8 +115,11 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 1);
-        assert_eq!(path, Some(vec![0, 1]));
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
+        assert_eq!(path, Some(vec![RoomId(0), RoomId(1)]));
     }
 
     #[test]
@@ -121,7 +129,10 @@ mod tests {
             Room::new(Door::new(DoorLock::LockedFromInside), Door::new(DoorLock::LockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 1);
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
         assert!(path.is_none());
     }
 
@@ -133,9 +144,12 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 2);
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
         assert!(path.is_some());
-        assert_ne!(path, vec![0, 1, 2]); // The middle room should be skipped
+        assert_ne!(path, Some(vec![RoomId(0), RoomId(1), RoomId(2)])); // The middle room should be skipped
     }
 
     #[test]
@@ -147,7 +161,10 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 3);
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
         assert!(path.is_none()); // No path since the middle rooms block the way
     }
 
@@ -160,8 +177,11 @@ mod tests {
             Room::new(Door::new(DoorLock::UnlockedFromInside), Door::new(DoorLock::UnlockedFromOutside)),
         ];
 
-        let path = PathFinder::find_path(&rooms, 0, 3);
-        assert_eq!(path, Some(vec![0, 1, 3])); // The third room is skipped
+        let room_grid = RoomGrid { rooms };
+        let mut pathfinder = PathFinder::new();
+        let path = pathfinder.find_path(RoomId(0), &room_grid);
+
+        assert_eq!(path, Some(vec![RoomId(0), RoomId(1), RoomId(3)])); // The third room is skipped
     }
 }
 
