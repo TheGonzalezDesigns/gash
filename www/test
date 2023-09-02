@@ -1,4 +1,14 @@
 #!/bin/bash
 
+mkdir tests
+
 # Bundle TypeScript code
-/root/.bun/bin/bun build --target=browser ./_index.ts > test.log 2>&1
+/root/.bun/bin/bun build --target=browser ./_index.ts > ./tests/build.log 2>&1 &
+
+wait
+
+bun test ./test.ts > ./tests/runtime.log 2>&1 &
+
+wait
+
+echo "Succesfully tested."
