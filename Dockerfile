@@ -21,6 +21,8 @@ WORKDIR $RD/wasm
 # Execute the build script
 RUN ./build
 
+RUN ./test
+
 WORKDIR $RD/www
 
 # Execute the build script
