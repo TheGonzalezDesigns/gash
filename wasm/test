@@ -1,6 +1,11 @@
 #!/bin/bash
 
-cargo test > test.log 2>&1 &
+iterations=10
+
+for ((i=1; i<=iterations; i++))
+do
+    cargo test >> test.log 2>&1 &
+done
 
 wait
 
