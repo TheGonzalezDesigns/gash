@@ -1,4 +1,4 @@
-import init, { greet } from "../wasm/pkg/wasm.js";
+import init, { greet } from "./production/wasm.js";
 import { animate } from "./modules/three";
 
 async function runWasm() {
