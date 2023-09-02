@@ -1,8 +1,9 @@
 use rand::Rng;
 use wasm_bindgen::prelude::*;
+use serde::{Serialize, Deserialize};
 
 #[wasm_bindgen]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum DoorLock {
     LockedFromInside,
     LockedFromOutside,
