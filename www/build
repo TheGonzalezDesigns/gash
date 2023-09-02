@@ -10,6 +10,8 @@ rsync -av ../WASM_Assets/* ./production
 # Bundle TypeScript code
 /root/.bun/bin/bun build --target=browser --minify --outdir=production ./index.ts > compile.log 2>&1
 
+cp ./index.ts ./_index.ts
+
 rm ./index.ts
 
 mv ./index.* ./production/
