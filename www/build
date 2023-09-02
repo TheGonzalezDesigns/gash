@@ -8,7 +8,7 @@ mkdir -p ./production
 rsync -av ../WASM_Assets/* ./production
 
 # Bundle TypeScript code
-/root/.bun/bin/bun build --target=browser --minify --outdir=production ./index.ts > compile_logs.txt 2>&1
+/root/.bun/bin/bun build --target=browser --minify --outdir=production ./index.ts > compile.log 2>&1
 
 rm ./index.ts
 
