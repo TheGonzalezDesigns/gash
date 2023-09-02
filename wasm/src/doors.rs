@@ -22,7 +22,7 @@ impl DoorLock {
 }
 
 #[wasm_bindgen]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Door {
     pub lock: DoorLock,
 }
