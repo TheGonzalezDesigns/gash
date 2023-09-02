@@ -1,4 +1,4 @@
-// Assuming Three.js is already imported
+import * as THREE from "three";
 
 // Create the scene
 const scene = new THREE.Scene();
@@ -10,7 +10,9 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.z = 5;
+camera.position.z = 15;
+camera.position.y = 5;
+camera.lookAt(new THREE.Vector3(5, 5, 0)); // Assuming a 10x10 grid centered around (5,5)
 
 // Set up the renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -24,11 +26,28 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(1, 1, 1);
 scene.add(directionalLight);
 
-// Create rooms and add them to the scene
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+// Define room geometry and material
+const geometry = new THREE.BoxGeometry(0.9, 0.9, 0.9); // Slightly less than 1 to see gaps between rooms
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green for now
-const room = new THREE.Mesh(geometry, material);
-scene.add(room);
+
+// Create a 2D grid of rooms and add them to the scene
+const rooms: THREE.Mesh[] = [];
+for (let i = 0; i < 10; i++) {
+  // For a 10x10 grid
+  for (let j = 0; j < 10; j++) {
+    const roomMesh = new THREE.Mesh(geometry, material.clone());
+    roomMesh.position.set(i, j, 0);
+    rooms.push(roomMesh);
+    scene.add(roomMesh);
+  }
+}
+
+// This function takes an array of room indices and highlights them
+export function highlightRooms(path: number[]) {
+  for (const index of path) {
+    rooms[index].material.color.set(0xff0000); // Highlight with red color
+  }
+}
 
 // Render the scene
 export function animate() {
