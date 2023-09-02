@@ -1,4 +1,4 @@
-use crate::doors::Door;
+use crate::doors::{Door, DoorLock};
 use rand::prelude::*;
 use wasm_bindgen::prelude::*;
 
@@ -26,8 +26,8 @@ impl RoomGrid {
         let mut rooms = Vec::with_capacity(num_rooms);
 
         for _ in 0..num_rooms {
-            let entry = Door::new(DoorLock::random(&mut rng), DoorLock::random(&mut rng));
-            let exit = Door::new(DoorLock::random(&mut rng), DoorLock::random(&mut rng));
+            let entry = Door::new(DoorLock::random(&mut rng));
+            let exit = Door::new(DoorLock::random(&mut rng));
             rooms.push(Room::new(entry, exit));
         }
 
