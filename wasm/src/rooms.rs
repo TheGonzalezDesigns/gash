@@ -1,35 +1,36 @@
 use crate::doors::Door;
-use rand::Rng;
+use rand::prelude::*;
+use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
 pub struct Room {
-    entry_door: Door,
-    exit_door: Door,
+    entry: Door,
+    exit: Door,
 }
 
 impl Room {
-    // Create a new room with two doors
-    pub fn new(entry_door: Door, exit_door: Door) -> Self {
-        Room { entry_door, exit_door }
+    fn new(entry: Door, exit: Door) -> Self {
+        Room { entry, exit }
     }
+}
 
-    // Generate a random room from available doors
-    pub fn random(available_doors: &Vec<Door>) -> Self {
+#[wasm_bindgen]
+pub struct RoomGrid {
+    rooms: Vec<Room>,
+}
+
+#[wasm_bindgen]
+impl RoomGrid {
+    pub fn new(num_rooms: usize) -> Self {
         let mut rng = rand::thread_rng();
-        let entry_index = rng.gen_range(0..available_doors.len());
-        let exit_index = rng.gen_range(0..available_doors.len());
+        let mut rooms = Vec::with_capacity(num_rooms);
 
-        // Ensure the entry and exit doors are not the same
-        while entry_index == exit_index {
-            exit_index = rng.gen_range(0..available_doors.len());
+        for _ in 0..num_rooms {
+            let entry = Door::new(DoorLock::random(&mut rng), DoorLock::random(&mut rng));
+            let exit = Door::new(DoorLock::random(&mut rng), DoorLock::random(&mut rng));
+            rooms.push(Room::new(entry, exit));
         }
 
-        Room::new(available_doors[entry_index].clone(), available_doors[exit_index].clone())
-    }
-
-    // Check if a room is accessible based on the state of its doors
-    pub fn is_accessible(&self) -> bool {
-        // Logic to determine if the room is accessible based on the state of its doors
-        // For example, a room is not accessible if both doors are locked from the outside.
-        !(self.entry_door.is_locked_from_outside && self.exit_door.is_locked_from_outside)
+        RoomGrid { rooms }
     }
 }
