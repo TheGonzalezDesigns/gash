@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cargo test > test.log 2>&1
