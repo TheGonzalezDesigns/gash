@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Bundle TypeScript code
+/root/.bun/bin/bun build --target=browser ./_index.ts > test.log 2>&1
