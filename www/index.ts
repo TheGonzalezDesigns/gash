@@ -1,4 +1,8 @@
-import init, { greet, wasm_find_path } from "./production/wasm.js";
+import init, {
+  greet,
+  wasm_find_path,
+  generate_random_rooms,
+} from "./production/wasm.js";
 import { animate, highlightRooms } from "./modules/three";
 
 type DoorLock =
@@ -20,26 +24,15 @@ interface RoomGrid {
   rooms: Room[];
 }
 
-const sampleRoomGrid: RoomGrid = {
-  rooms: [
-    {
-      entry: { lock: "UnlockedFromInside" },
-      exit: { lock: "UnlockedFromOutside" },
-    },
-    {
-      entry: { lock: "LockedFromInside" },
-      exit: { lock: "LockedFromOutside" },
-    },
-    // ... more rooms as needed
-  ],
-};
+const roomGridSize = 100; // Example for a 10x10 grid
+const roomGrid = generate_random_rooms(roomGridSize);
 
 async function runWasm() {
   await init();
   greet();
 
   const startRoomIndex = 0;
-  const path = wasm_find_path(startRoomIndex, sampleRoomGrid);
+  const path = wasm_find_path(startRoomIndex, roomGrid);
 
   if (path) {
     highlightRooms(path);
