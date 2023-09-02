@@ -9,7 +9,7 @@ pub struct Room {
 }
 
 impl Room {
-    fn new(entry: Door, exit: Door) -> Self {
+    pub fn new(entry: Door, exit: Door) -> Self { // <-- Add pub
         Room { entry, exit }
     }
 }
