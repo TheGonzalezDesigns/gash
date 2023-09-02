@@ -6,6 +6,6 @@ curl -fsSL https://bun.sh/install | bash
 mkdir -p ./production
 
 # Bundle TypeScript code
-bun build --minify --outdir=production ./index.ts
+bun build --target=browser --minify --outdir=production ./index.ts
 
 mv ../wasm_bg.wasm ./production/
