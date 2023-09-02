@@ -1,7 +1,9 @@
 use crate::doors::{Door, DoorLock};
 use wasm_bindgen::prelude::*;
+use serde::{Serialize, Deserialize};
 
 #[wasm_bindgen]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Room {
     pub entry: Door,
     pub exit: Door,
@@ -17,6 +19,7 @@ impl Room {
 #[derive(Hash, PartialEq, Eq, Clone, Debug)]
 pub struct RoomId(pub usize);
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct RoomGrid {
     pub rooms: Vec<Room>,
 }
