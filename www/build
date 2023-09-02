@@ -9,3 +9,5 @@ mkdir -p ./production
 bun build --target=browser --minify --outdir=production ./index.ts
 
 mv ../wasm_bg.wasm ./production/
+
+mv ./index.html ./production/
