@@ -8,6 +8,7 @@ do
     title="\n=============================================$test---------------------------------------------\n"
     echo -e $title >> test.log
     cargo test >> test.log 2>&1 &
+    wait
 done
 
 wait
