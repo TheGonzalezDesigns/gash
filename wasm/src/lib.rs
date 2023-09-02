@@ -1,5 +1,6 @@
 mod doors;
 mod rooms;
+mod pathfinding;
 
 pub use rooms::Room;
 
