@@ -25,7 +25,7 @@ pub struct Door {
 }
 
 impl Door {
-    pub fn new(lock: DoorLock) -> Self {
+    pub fn new(lock: DoorLock) -> Self { // <-- Add pub
         Door { lock }
     }
 
