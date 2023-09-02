@@ -1,9 +1,22 @@
+use rand::Rng;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DoorLock {
     LockedFromInside,
     LockedFromOutside,
     UnlockedFromInside,
     UnlockedFromOutside,
+}
+
+impl DoorLock {
+    pub fn random<R: Rng>(rng: &mut R) -> Self {
+        match rng.gen_range(0..=3) {
+            0 => DoorLock::LockedFromInside,
+            1 => DoorLock::LockedFromOutside,
+            2 => DoorLock::UnlockedFromInside,
+            _ => DoorLock::UnlockedFromOutside,
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
