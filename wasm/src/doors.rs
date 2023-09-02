@@ -1,40 +1,32 @@
-use rand::seq::SliceRandom;
-
-#[derive(Clone, Copy, Debug)]
-pub enum LockState {
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum DoorLock {
     LockedFromInside,
     LockedFromOutside,
-    Locked,
+    UnlockedFromInside,
+    UnlockedFromOutside,
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Debug, Clone)]
 pub struct Door {
-    pub lock_state: LockState,
+    pub lock: DoorLock,
 }
 
-#[derive(Clone, Debug)]
-pub struct Room {
-    pub entry: Door,
-    pub exit: Door,
-}
+impl Door {
+    pub fn new(lock: DoorLock) -> Self {
+        Door { lock }
+    }
 
-impl Room {
-    // Function to generate a random room
-    pub fn random_room() -> Self {
-        let mut rng = rand::thread_rng();
-        let lock_states = [
-            LockState::LockedFromInside,
-            LockState::LockedFromOutside,
-            LockState::Locked,
-        ];
+    pub fn is_accessible_from_inside(&self) -> bool {
+        match self.lock {
+            DoorLock::LockedFromInside | DoorLock::LockedFromOutside => false,
+            DoorLock::UnlockedFromInside | DoorLock::UnlockedFromOutside => true,
+        }
+    }
 
-        Room {
-            entry: Door {
-                lock_state: *lock_states.choose(&mut rng).unwrap(),
-            },
-            exit: Door {
-                lock_state: *lock_states.choose(&mut rng).unwrap(),
-            },
+    pub fn is_accessible_from_outside(&self) -> bool {
+        match self.lock {
+            DoorLock::LockedFromInside | DoorLock::LockedFromOutside => false,
+            DoorLock::UnlockedFromInside | DoorLock::UnlockedFromOutside => true,
         }
     }
 }
