@@ -31,8 +31,12 @@ async function runWasm() {
   await init();
   greet();
 
+  const roomGridSize = 100;
+  const roomGrid = generate_random_rooms(roomGridSize);
+
   const startRoomIndex = 0;
-  const path = wasm_find_path(startRoomIndex, roomGrid);
+  const endRoomIndex = 99; // Example for last room in a 10x10 grid
+  const path = wasm_find_path(startRoomIndex, endRoomIndex, roomGrid);
 
   if (path) {
     highlightRooms(path);
