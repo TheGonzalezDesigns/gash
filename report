@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This script takes three arguments: context, test_name, and status and prints them to ./master.log
+
+if [ $# -ne 3 ]; then
+    echo "Error: three arguments are required"
+    exit 1
+fi
+
+context=$1
+test_name=$2
+status=$3
+result=$(if [ $status -eq 0 ]; then echo "✅ Succeeded"; else echo "❌ Failed"; fi)
+
+echo -e "[[ $context ]]\t$test_name: $result\n" >> ./master.log
