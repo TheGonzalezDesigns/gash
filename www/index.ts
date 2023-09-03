@@ -23,11 +23,7 @@ interface RoomGrid {
   rooms: Room[];
 }
 
-const roomGridSize = 100; // Example for a 10x10 grid
-const roomGrid = WASM.generate_random_rooms(roomGridSize);
-
 async function runWasm() {
-  await init();
   WASM.greet();
 
   const roomGridSize = 100;
