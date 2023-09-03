@@ -42,6 +42,6 @@ async function runWasm() {
   }
 }
 
+draw.animate();
 await runWasm();
-await draw.animate();
 console.log("Hello via Bun!");
