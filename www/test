@@ -3,11 +3,13 @@
 mkdir tests
 
 # Bundle TypeScript code
-/root/.bun/bin/bun build --target=browser ./_index.ts > ./tests/build.log 2>&1 &
+/root/.bun/bin/bun record_build &
+#/root/.bun/bin/bun build --target=browser ./_index.ts > ./tests/build.log 2>&1 &
 
 wait
 
-/root/.bun/bin/bun test ./test.ts > ./tests/runtime.log 2>&1 &
+/root/.bun/bin/bun test_units &
+#/root/.bun/bin/bun test ./test.ts > ./tests/runtime.log 2>&1 &
 
 wait
 
