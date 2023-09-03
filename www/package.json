@@ -2,6 +2,9 @@
   "name": "www",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "make": "bun build --minify --target=browser --outdir=./production ./index.ts"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
