@@ -10,7 +10,7 @@ do
     cargo test >> test.log 2>&1
 
     status=$?
-    ../report wasm cargo_test status
+    ../report wasm cargo_test $status
 done
 
 wait
