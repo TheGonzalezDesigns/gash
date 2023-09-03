@@ -45,14 +45,15 @@ for (let i = 0; i < 10; i++) {
 
 // This function takes an array of room indices and highlights them
 export function highlightRooms(path: number[]) {
-  console.log(`Highlighting rooms for path: [${path.join(", ")}]`);
+  console.log("highlightRooms called with path:", path);
   let index = 0;
   const highlightInterval = setInterval(() => {
     if (index < path.length) {
-      console.log(`Highlighting room at index ${path[index]} with red color`);
+      console.log(`Highlighting room at index ${path[index]}`);
       rooms[path[index]].material.color.set(0xff0000); // Highlight with red color
       index++;
     } else {
+      console.log("Finished highlighting rooms");
       clearInterval(highlightInterval);
     }
   }, 200); // 200ms delay for example
