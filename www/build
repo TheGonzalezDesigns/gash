@@ -3,6 +3,8 @@
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 
+/root/.bun/bin/bun add three.js
+
 mkdir -p ./production
 
 rsync -av ../WASM_Assets/* ./production
