@@ -8,14 +8,14 @@ cp ./test.ts ./main.test.ts
 /root/.bun/bin/bun record_build
 
 status=$?
-../report www record_build status
+../report www record_build $status
 
 wait
 
 /root/.bun/bin/bun test_unit
 
 status=$?
-../report www test_units status
+../report www test_units $status
 
 wait
 
