@@ -14,30 +14,39 @@ impl PathFinder {
         }
     }
 
-    pub fn find_path(&mut self, start_room: RoomId, grid: &RoomGrid) -> Option<Vec<RoomId>> {
-        self.dfs(start_room, grid);
-        if !self.path.is_empty() {
+    pub fn find_path(&mut self, start_room: RoomId, end_room: RoomId, grid: &RoomGrid) -> Option<Vec<RoomId>> {
+        if self.dfs(start_room, end_room, grid) {
             Some(self.path.clone())
         } else {
             None
         }
     }
 
-    fn dfs(&mut self, current: RoomId, grid: &RoomGrid) {
+    fn dfs(&mut self, current: RoomId, end_room: RoomId, grid: &RoomGrid) -> bool {
         if self.visited.contains(&current) {
-            return;
+            return false;
         }
 
         self.visited.insert(current.clone());
         self.path.push(current.clone());
 
+        if current == end_room {
+            return true;
+        }
+
         for neighbor in grid.neighbors(&current) {
             if !self.visited.contains(&neighbor) {
                 if grid.is_accessible(&current, &neighbor) {
-                    self.dfs(neighbor, grid);
+                    if self.dfs(neighbor, end_room, grid) {
+                        return true;
+                    }
                 }
             }
         }
+
+        // If no path is found, pop the room from the path
+        self.path.pop();
+        return false;
     }
 }
 
