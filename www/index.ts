@@ -1,6 +1,6 @@
 import init from "./production/wasm.js";
 import * as WASM from "./production/wasm.js";
-import { animate, highlightRooms } from "./modules/three";
+import * as draw from "./modules/three";
 
 await init();
 
@@ -28,7 +28,7 @@ const roomGrid = WASM.generate_random_rooms(roomGridSize);
 
 async function runWasm() {
   await init();
-  greet();
+  WASM.greet();
 
   const roomGridSize = 100;
   const roomGrid = WASM.generate_random_rooms(roomGridSize);
@@ -38,7 +38,7 @@ async function runWasm() {
   const path = WASM.find_path(startRoomIndex, endRoomIndex, roomGrid);
 
   if (path) {
-    WASM.highlightRooms(path);
+    draw.highlightRooms(path);
   }
 }
 
