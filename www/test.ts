@@ -1,3 +1,5 @@
+import { describe, test, expect } from "bun:test";
+
 import init from "./production/wasm.js";
 import * as WASM from "./production/wasm.js";
 
