@@ -16,7 +16,7 @@ pub fn greet() {
 }
 
 #[wasm_bindgen]
-pub fn wasm_find_path(start_room: usize, room_grid_js: &JsValue) -> Option<Vec<usize>> {
+pub fn find_path(start_room: usize, room_grid_js: &JsValue) -> Option<Vec<usize>> {
     let grid: rooms::RoomGrid = serde_wasm_bindgen::from_value(room_grid_js.clone()).unwrap();
     let mut pathfinder = pathfinding::PathFinder::new();
     let path = pathfinder.find_path(rooms::RoomId(start_room), &grid);
