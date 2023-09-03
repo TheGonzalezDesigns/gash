@@ -12,7 +12,7 @@ status=$?
 
 wait
 
-/root/.bun/bin/bun test_units
+/root/.bun/bin/bun test_unit
 
 status=$?
 ../report www test_units status
