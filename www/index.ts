@@ -31,7 +31,8 @@ async function WebAssembly() {
 
   const startRoomIndex = 0;
   const endRoomIndex = 99; // Example for last room in a 10x10 grid
-  const path = WASM.find_path(startRoomIndex, endRoomIndex, roomGrid);
+  const path = WASM.find_path(startRoomIndex, roomGrid);
+  //const path = WASM.find_path(startRoomIndex, endRoomIndex, roomGrid);
 
   if (path) {
     draw.highlightRooms(path);
