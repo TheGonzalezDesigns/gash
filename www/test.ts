@@ -1,12 +1,15 @@
-import { greet, wasm_find_path, generate_random_rooms } from "./index";
+import init from "./production/wasm.js";
+import * as WASM from "./production/wasm.js";
 
-describe("greet function", () => {
-  test("it should greet", () => {
-    expect(greet()).toBe("Hello, wasm!");
+await init();
+
+describe("WASM.greet function", () => {
+  test("it should WASM.greet", () => {
+    expect(WASM.greet()).toBe("Hello, wasm!");
   });
 });
 
-describe("wasm_find_path function", () => {
+describe("WASM.find_path function", () => {
   const sampleValidRoomGrid = {
     rooms: [
       {
@@ -21,7 +24,7 @@ describe("wasm_find_path function", () => {
   };
 
   test("it should find a path given valid room grid", () => {
-    const result = wasm_find_path(0, sampleValidRoomGrid);
+    const result = WASM.find_path(0, sampleValidRoomGrid);
     expect(result.length).toBeGreaterThan(0);
   });
 
@@ -38,19 +41,19 @@ describe("wasm_find_path function", () => {
         },
       ],
     };
-    const result = wasm_find_path(0, sampleInvalidRoomGrid);
+    const result = WASM.find_path(0, sampleInvalidRoomGrid);
     expect(result).toBeNull();
   });
 
   test("it should handle out of bounds start room index", () => {
-    const result = wasm_find_path(10, sampleValidRoomGrid); // 10 is out of bounds for the sample grid
+    const result = WASM.find_path(10, sampleValidRoomGrid); // 10 is out of bounds for the sample grid
     expect(result).toBeNull();
   });
 });
 
-describe("generate_random_rooms function", () => {
+describe("WASM.generate_random_rooms function", () => {
   const num_rooms = 5;
-  const result = generate_random_rooms(num_rooms);
+  const result = WASM.generate_random_rooms(num_rooms);
 
   test("it should generate the specified number of rooms", () => {
     expect(result.rooms.length).toBe(num_rooms);
