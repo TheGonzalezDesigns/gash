@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "make": "bun build --minify --target=browser --outdir=./production ./index.ts"
+    "make": "bun build --minify --target=browser --outdir=./production ./index.ts > compile.log 2>&1"
   },
   "devDependencies": {
     "bun-types": "latest"
