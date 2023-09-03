@@ -28,7 +28,7 @@ scene.add(directionalLight);
 
 // Define room geometry and material
 const geometry = new THREE.BoxGeometry(0.9, 0.9, 0.9); // Slightly less than 1 to see gaps between rooms
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green for now
+const material = new THREE.MeshBasicMaterial({ color: 0x808080 }); // Set initial color to grey
 
 // Create a 2D grid of rooms and add them to the scene
 const rooms: THREE.Mesh[] = [];
@@ -59,4 +59,13 @@ export function highlightRooms(path: number[]) {
 export function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+}
+
+// Array to store the blocks for future reference
+const blocks = rooms;
+
+export function updateBlockColor(index: number, color: string) {
+  if (blocks[index]) {
+    blocks[index].material.color.set(color);
+  }
 }
