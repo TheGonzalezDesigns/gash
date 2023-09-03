@@ -27,7 +27,7 @@ async function WebAssembly() {
   WASM.greet();
 
   const roomGridSize = 100;
-  const roomGrid = WASM.generate_random_rooms(roomGridSize);
+  const roomGrid: RoomGrid = WASM.generate_random_rooms(roomGridSize);
 
   const startRoomIndex = 0;
   const endRoomIndex = 99; // Example for last room in a 10x10 grid
