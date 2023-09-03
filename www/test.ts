@@ -24,7 +24,7 @@ describe("WASM.find_path function", () => {
   };
 
   test("it should find a path given valid room grid", () => {
-    const result = WASM.find_path(0, sampleValidRoomGrid);
+    const result = WASM.find_path(0, 1, sampleValidRoomGrid); // added end room
     expect(result.length).toBeGreaterThan(0);
   });
 
@@ -41,12 +41,12 @@ describe("WASM.find_path function", () => {
         },
       ],
     };
-    const result = WASM.find_path(0, sampleInvalidRoomGrid);
+    const result = WASM.find_path(0, 1, sampleInvalidRoomGrid); // added end room
     expect(result).toBeNull();
   });
 
   test("it should handle out of bounds start room index", () => {
-    const result = WASM.find_path(10, sampleValidRoomGrid); // 10 is out of bounds for the sample grid
+    const result = WASM.find_path(10, 1, sampleValidRoomGrid); // 10 is out of bounds for the sample grid
     expect(result).toBeNull();
   });
 });
