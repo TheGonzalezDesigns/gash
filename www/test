@@ -2,12 +2,20 @@
 
 mkdir tests
 
+cp ./test.ts ./main.test.ts
+
 # Bundle TypeScript code
-/root/.bun/bin/bun record_build &
+/root/.bun/bin/bun record_build
+
+status=$?
+../report www record_build status
 
 wait
 
-/root/.bun/bin/bun test_units &
+/root/.bun/bin/bun test_units
+
+status=$?
+../report www test_units status
 
 wait
 
