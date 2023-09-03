@@ -39,14 +39,17 @@ for (let i = 0; i < 10; i++) {
     roomMesh.position.set(i, j, 0);
     rooms.push(roomMesh);
     scene.add(roomMesh);
+    console.log(`Created room at position (${i}, ${j})`);
   }
 }
 
 // This function takes an array of room indices and highlights them
 export function highlightRooms(path: number[]) {
+  console.log(`Highlighting rooms for path: [${path.join(", ")}]`);
   let index = 0;
   const highlightInterval = setInterval(() => {
     if (index < path.length) {
+      console.log(`Highlighting room at index ${path[index]} with red color`);
       rooms[path[index]].material.color.set(0xff0000); // Highlight with red color
       index++;
     } else {
@@ -66,6 +69,9 @@ const blocks = rooms;
 
 export function updateBlockColor(index: number, color: string) {
   if (blocks[index]) {
+    console.log(`Updating block at index ${index} to color ${color}`);
     blocks[index].material.color.set(color);
+  } else {
+    console.warn(`Attempted to update non-existent block at index ${index}`);
   }
 }
