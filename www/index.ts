@@ -23,7 +23,7 @@ interface RoomGrid {
   rooms: Room[];
 }
 
-async function runWasm() {
+async function WebAssembly() {
   WASM.greet();
 
   const roomGridSize = 100;
@@ -39,5 +39,5 @@ async function runWasm() {
 }
 
 draw.animate();
-await runWasm();
+await WebAssembly();
 console.log("Hello via Bun!");
