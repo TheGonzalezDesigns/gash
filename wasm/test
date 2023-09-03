@@ -7,10 +7,13 @@ do
     test="                    Test $i:"
     title="\n=============================================\n$test\n---------------------------------------------\n"
     echo -e $title >> test.log
-    cargo test >> test.log 2>&1 &
-    wait
+    cargo test >> test.log 2>&1
+
+    status=$?
+    ../report wasm cargo_test status
 done
 
 wait
 
 echo "Succesfully Tested"
+#seq 1 $iterations | parallel -j+0 'cargo test >> test.log 2>&1 &'
