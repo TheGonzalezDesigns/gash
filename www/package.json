@@ -3,9 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "make": "bun build --minify --target=browser --outdir=./production ./index.ts > compile.log 2>&1",
-    "test_unit": "bun test ./test.ts > ./tests/runtime.log 2>&",
-    "record_build": "bun build --target=browser ./_index.ts > ./tests/build.log 2>&"
+    "make": "/root/.bun/bin/bun build --minify --target=browser --outdir=./production ./index.ts > compile.log 2>&1",
+    "test_unit": "/root/.bun/bin/bun test ./test.ts > ./tests/runtime.log 2>&1",
+    "record_build": "/root/.bun/bin/bun build --target=browser ./_index.ts > ./tests/build.log 2>&1"
   },
   "devDependencies": {
     "bun-types": "latest"
