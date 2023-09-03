@@ -11,4 +11,4 @@ context=$1
 test_name=$2
 status=$3
 result=$(if [ $status -eq 0 ]; then echo "\033[92m✅ Succeeded\033[0m"; else echo "\e[31m❌ Failed\e[0m"; fi)
-echo -e "\e[33m[[ $context ]]\e[0m\t$test_name: $result\n" >> ./master.log
+echo -e "\e[33m[[ $context ]]\e[0m\t$test_name: $result\n" >> ~/master.log
