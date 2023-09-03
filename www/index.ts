@@ -34,7 +34,20 @@ async function WebAssembly() {
   const path = WASM.find_path(startRoomIndex, endRoomIndex, roomGrid);
 
   if (path) {
-    draw.highlightRooms(path);
+    visualizePath(path);
+  }
+}
+
+function visualizePath(path: number[]) {
+  for (let i = 0; i < path.length; i++) {
+    setTimeout(() => {
+      // Setting the color to yellow for traversal
+      draw.updateBlockColor(path[i], "yellow");
+      if (i === path.length - 1) {
+        // If it's the last room in the path, set its color to green
+        draw.updateBlockColor(path[i], "green");
+      }
+    }, i * 500); // 500ms delay between each block update for visualization
   }
 }
 
