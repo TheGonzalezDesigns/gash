@@ -2,9 +2,9 @@
 
 ![Banner Image](https://i.imgur.com/uCUmyGs.png)
 
-> GASH: a repo for testing crypto arbitrage algorithms in real-time with Rust and WebAssembly. Fast, portable, and customizable. Check it out!
-
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-purple)](https://threejs.org/) ![Three.js](https://img.shields.io/badge/Rust-Pathfinder-orange) 
+
+> GASH: Test your crypto arbitrage algorithms in real-time with Rust and WebAssembly. Fast, portable, beautiful, and customizable. Check it out!
 
 ---
 
