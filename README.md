@@ -1,8 +1,8 @@
-# 🚪 GASH: Real-time Arbitrage Pathfinding Visualization
+# ⚡️ GASH: Real-time Pathfinding Visualization
 
 ![Banner Image](https://i.imgur.com/uCUmyGs.png)
 
-> Visualize arbitrage pathfinding algorithms in real time!
+> Visualize pathfinding algorithms in real time!
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-orange)](https://threejs.org/) 
 
