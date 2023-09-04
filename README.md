@@ -4,7 +4,7 @@
 
 > Visualize pathfinding algorithms in real time!
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-orange)](https://threejs.org/)![Rust](https://img.shields.io/badge/-Rust-000000?style=flat&logo=rust&logoColor=orange)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-orange)](https://threejs.org/) [![Rust](https://img.shields.io/badge/-Rust-000000?style=flat&logo=rust&logoColor=orange)]
  
 **Note**: GASH is currently in early beta. We are testing with mock data instead of optimized algorithms on real data. Optimizations and updates coming soon!
 
