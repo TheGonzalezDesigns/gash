@@ -73,3 +73,10 @@ This project follows the [MIT](./LICENSE) licensing protocol.
 
 ---
 
+## Why?
+Inspired by the need to test different pathfinding algorithms for the sake of crypto arbitrage, this repo was designed to allow FinTech and Crypto Devs alike, to prove the effectiveness of their custom algorithms in real-time.
+As your custom algorithm finds an arbitrage opportunity, the path to reach this opportunity is reflected in the browser. 
+Given that finance is extremely competitive this repo was build with rust and wasm for extreme speed. 
+You can of course fork the repo and switch to any other low level language if this is not enough. 
+We use bun to compile the typescript-wasm imports in a tiny file that should load instantly onto your browser for maximum portability.
+This is all in development but you can expect regular updates as I improve this repo to fit my needs.
