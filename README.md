@@ -22,21 +22,21 @@
 
 1. **Clone the repository**
 
-\```bash
+```bash
 git clone https://github.com/TheGonzalezDesigns/gash.git
-\```
+```
 
 2. **Navigate to the directory**
 
-\```bash
+```bash
 cd gash
-\```
+```
 
 3. **Run the project using Docker** (Ensure you have Docker and Docker Compose installed)
 
-\```bash
+```bash
 docker-compose up
-\```
+```
 
 ---
 
