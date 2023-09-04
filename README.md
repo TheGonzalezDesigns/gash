@@ -4,7 +4,7 @@
 
 > Visualize pathfinding algorithms in real time!
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-orange)](https://threejs.org/) [![Three.js](https://img.shields.io/badge/Rust-Pathfinder-orange) 
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TheGonzalezDesigns/gash) [![WASM](https://img.shields.io/badge/WASM-powered-blue)](https://webassembly.org/) [![Three.js](https://img.shields.io/badge/Three.js-visuals-purple)](https://threejs.org/) ![Three.js](https://img.shields.io/badge/Rust-Pathfinder-orange) 
 
 ---
 
