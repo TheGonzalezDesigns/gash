@@ -7,7 +7,7 @@ await init();
 
 describe("WASM.greet function", () => {
   test("it should WASM.greet", () => {
-    expect(WASM.greet()).toBe("Hello, wasm!");
+    expect(WASM.greet()).toBe("Hello from Rust!");
   });
 });
 
