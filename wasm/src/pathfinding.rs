@@ -8,45 +8,29 @@ pub struct PathFinder {
 
 impl PathFinder {
     pub fn new() -> Self {
-        PathFinder {
-            visited: HashSet::new(),
-            path: Vec::new(),
-        }
+        PathFinder
     }
 
-    pub fn find_path(&mut self, start_room: RoomId, end_room: RoomId, grid: &RoomGrid) -> Option<Vec<RoomId>> {
-        if self.dfs(start_room, &end_room, grid) {
-            Some(self.path.clone())
-        } else {
-            None
-        }
-    }
+    pub fn find_path(&self, start_room: RoomId, end_room: RoomId, grid: &RoomGrid) -> Option<Vec<RoomId>> {
+        let mut visited = HashSet::new();
+        let mut queue = VecDeque::new();
+        queue.push_back((start_room, vec![start_room]));
 
-    fn dfs(&mut self, current: RoomId, end_room: &RoomId, grid: &RoomGrid) -> bool {
-        if self.visited.contains(&current) {
-            return false;
-        }
-
-        self.visited.insert(current.clone());
-        self.path.push(current.clone());
-
-        if &current == end_room {
-            return true;
-        }
-
-        for neighbor in grid.neighbors(&current) {
-            if !self.visited.contains(&neighbor) {
-                if grid.is_accessible(&current, &neighbor) {
-                    if self.dfs(neighbor, end_room, grid) {
-                        return true;
+        while let Some((current, path)) = queue.pop_front() {
+            if current == end_room {
+                return Some(path);
+            }
+            if visited.insert(current) {
+                for neighbor in grid.neighbors(&current) {
+                    if !visited.contains(&neighbor) && grid.is_accessible(&current, &neighbor) {
+                        let mut new_path = path.clone();
+                        new_path.push(neighbor);
+                        queue.push_back((neighbor, new_path));
                     }
                 }
             }
         }
-
-        // If no path is found, pop the room from the path
-        self.path.pop();
-        return false;
+        None
     }
 }
 
